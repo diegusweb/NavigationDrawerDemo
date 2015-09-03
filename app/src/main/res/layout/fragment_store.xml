@@ -1,16 +1,15 @@
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:id="@+id/fragment_store"
-    tools:context="com.example.diegorueda.drawernavigation.StoreFragment">
+    tools:context="com.example.diegorueda.drawernavigation.ui.fragments.StoreFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:gravity="center"
-        android:text="Productos layut
-        " />
+<android.support.v7.widget.RecyclerView
+    android:id="@+id/rvContacts"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" />
 
-</FrameLayout>
+
+
+</RelativeLayout>

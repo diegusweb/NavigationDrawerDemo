@@ -13,6 +13,9 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
 
+import com.example.diegorueda.drawernavigation.ui.fragments.HomeFragment;
+import com.example.diegorueda.drawernavigation.ui.fragments.StoreFragment;
+
 
 public class MainActivity extends AppCompatActivity {
 
@@ -53,9 +56,7 @@ public class MainActivity extends AppCompatActivity {
 
     private void selectDrawerItem(MenuItem menuItem){
         Fragment fragment = null;
-
         Toast.makeText(getApplicationContext(), menuItem.getTitle().toString(), Toast.LENGTH_SHORT).show();
-
         Class fragmentClass;
 
         switch(menuItem.getTitle().toString()) {
