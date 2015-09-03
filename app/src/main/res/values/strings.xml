@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">DrawerNavigation</string>
+
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
+
+    <string name="home_item">Home</string>
+    <string name="productos_item">Productos</string>
+    <string name="compras_item">Compras</string>
+    <string name="username">\@juanavalencia</string>
+</resources>
