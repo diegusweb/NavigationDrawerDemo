@@ -2,7 +2,8 @@ package com.example.diegorueda.drawernavigation;
 
 
 import android.os.Bundle;
-import android.app.Fragment;
+
+import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,10 +12,10 @@ import android.view.ViewGroup;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class Store extends Fragment {
+public class StoreFragment extends Fragment {
 
 
-    public Store() {
+    public StoreFragment() {
         // Required empty public constructor
     }
 

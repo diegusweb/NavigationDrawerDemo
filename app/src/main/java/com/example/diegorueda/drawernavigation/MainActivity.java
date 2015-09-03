@@ -1,6 +1,8 @@
 package com.example.diegorueda.drawernavigation;
 
 import android.support.design.widget.NavigationView;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
@@ -39,11 +41,50 @@ public class MainActivity extends AppCompatActivity {
                         menuItem.setChecked(true);
                         String title = menuItem.getTitle().toString();
                         drawerLayout.closeDrawers();
-                        Toast.makeText(getApplicationContext(), title, Toast.LENGTH_SHORT).show();
+                        //Toast.makeText(getApplicationContext(), title, Toast.LENGTH_SHORT).show();
+
+                        selectDrawerItem(menuItem);
+
                         return true;
                     }
                 }
         );
+    }
+
+    private void selectDrawerItem(MenuItem menuItem){
+        Fragment fragment = null;
+
+        Toast.makeText(getApplicationContext(), menuItem.getTitle().toString(), Toast.LENGTH_SHORT).show();
+
+        Class fragmentClass;
+
+        switch(menuItem.getTitle().toString()) {
+            case "Productos":
+                fragmentClass = StoreFragment.class;
+                break;
+            case "Home":
+                fragmentClass = HomeFragment.class;
+                break;
+            default:
+                fragmentClass = HomeFragment.class;
+        }
+
+        try {
+            fragment = (Fragment) fragmentClass.newInstance();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        // Insert the fragment by replacing any existing fragment
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        fragmentManager.beginTransaction().replace(R.id.content_frame, fragment).commit();
+
+        // Highlight the selected item, update the title, and close the drawer
+        menuItem.setChecked(true);
+        setTitle(menuItem.getTitle());
+
+        drawerLayout.closeDrawers();
     }
 
     private void setToolbar(){
@@ -74,5 +115,10 @@ public class MainActivity extends AppCompatActivity {
        }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    protected void onPostCreate(Bundle savedInstanceState) {
+        super.onPostCreate(savedInstanceState);
     }
 }

@@ -2,15 +2,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:id="@+id/fragment_store"
-    tools:context="com.example.diegorueda.drawernavigation.StoreFragment">
+    android:id="@+id/fragment_home"
+    tools:context="com.example.diegorueda.drawernavigation.HomeFragment">
 
     <!-- TODO: Update blank fragment layout -->
     <TextView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:gravity="center"
-        android:text="Productos layut
-        " />
+        android:text="@string/hello_blank_fragment" />
 
 </FrameLayout>
