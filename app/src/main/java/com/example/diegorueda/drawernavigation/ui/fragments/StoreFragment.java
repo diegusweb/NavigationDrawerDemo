@@ -20,6 +20,7 @@ import com.example.diegorueda.drawernavigation.ui.adapter.ContactsAdapter;
  */
 public class StoreFragment extends Fragment {
 
+    private String[] mList;
 
     public StoreFragment() {
         // Required empty public constructor
@@ -30,12 +31,14 @@ public class StoreFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
+        mList = getResources().getStringArray(R.array.numbers);
+
         View view = inflater.inflate(R.layout.fragment_store, container, false);
 
         // Lookup the recyclerview in activity layout
         RecyclerView rvContacts = (RecyclerView) view.findViewById(R.id.rvContacts);
         // Create adapter passing in the sample user data
-        ContactsAdapter adapter = new ContactsAdapter(Contact.createContactList(20));
+        ContactsAdapter adapter = new ContactsAdapter(getActivity(), mList);
         // Attach the adapter to the recyclerview to populate items
         rvContacts.setAdapter(adapter);
         // Set layout manager to position the items

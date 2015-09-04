@@ -7,6 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.diegorueda.drawernavigation.R;
 import com.example.diegorueda.drawernavigation.model.Contact;
@@ -18,64 +19,70 @@ import java.util.List;
  */
 public class ContactsAdapter extends RecyclerView.Adapter<ContactsAdapter.ViewHolder> {
 
-    @Override
-    public ViewHolder onCreateViewHolder(ViewGroup viewGroup, int i) {
-        Context context = viewGroup.getContext();
-        LayoutInflater inflater = LayoutInflater.from(context);
+    private Context mContext;
+    private String[] mList;
 
-        // Inflate the custom layout
-        View contactView = inflater.inflate(R.layout.item_contact,viewGroup,false);
-
-        // Return a new holder instance
-        ViewHolder viewHolder = new ViewHolder(contactView);
-
-        return viewHolder;
+    public ContactsAdapter(Context contexts, String[] list) {
+        this.mContext = contexts;
+        this.mList = list;
     }
 
-    // Involves populating data into the item through holder
     @Override
-    public void onBindViewHolder(ViewHolder viewHolder, int i) {
-        // Get the data model based on position
-        Contact contact = mContacts.get(i);
+    public ContactsAdapter.ViewHolder onCreateViewHolder(ViewGroup viewGroup, int i) {
+        LayoutInflater inflater = LayoutInflater.from(viewGroup.getContext());
+        View itemView = inflater.inflate(R.layout.item_contact, viewGroup, false);
+        return new ViewHolder(itemView);
+    }
 
-        TextView textView = viewHolder.nameTextView;
-        textView.setText(contact.getmName());
-
-        Button button = viewHolder.messageButton;
-
-        if(contact.ismOnline()){
-            button.setText("Message");
-            button.setEnabled(true);
-        }
-        else {
-            button.setText("Offline");
-            button.setEnabled(false);
-        }
+    @Override
+    public void onBindViewHolder(ContactsAdapter.ViewHolder holder, int position) {
+        holder.titleTextView.setText(mList[position]);
+        holder.setClickListener(new ItemClickListener() {
+            @Override
+            public void onClick(View view, int position, boolean isLongClick) {
+                if (isLongClick) {
+                    Toast.makeText(mContext, "#" + position + " - " + mList[position] + " (Long click)", Toast.LENGTH_SHORT).show();
+                } else {
+                    Toast.makeText(mContext, "#" + position + " - " + mList[position], Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
     }
 
     @Override
     public int getItemCount() {
-        return mContacts.size();
+        return mList.length;
     }
 
-    // Store a member variable for the contacts
-    private List<Contact> mContacts;
+    public static class ViewHolder extends RecyclerView.ViewHolder
+            implements View.OnClickListener, View.OnLongClickListener{
 
-    // Pass in the contact array into the constructor
-    public ContactsAdapter(List<Contact> contacts) {
-        mContacts = contacts;
-    }
+        private TextView titleTextView;
+        private ItemClickListener clickListener;
 
-    public static class ViewHolder extends RecyclerView.ViewHolder{
-
-        public TextView nameTextView;
-        public Button messageButton;
 
         public ViewHolder(View itemView) {
             super(itemView);
+            titleTextView = (TextView)itemView.findViewById(R.id.contact_name);
+            itemView.setTag(itemView);
+            itemView.setOnClickListener(this);
+            itemView.setOnLongClickListener(this);
 
-            nameTextView = (TextView) itemView.findViewById(R.id.contact_name);
-            messageButton = (Button) itemView.findViewById(R.id.message_button);
+        }
+
+        public void setClickListener(ItemClickListener itemClickListener) {
+            this.clickListener = itemClickListener;
+        }
+
+        @Override
+        public void onClick(View view) {
+            clickListener.onClick(view, getPosition(), false);
+        }
+
+        @Override
+        public boolean onLongClick(View view) {
+            clickListener.onClick(view, getPosition(), true);
+            return true;
         }
     }
 }
