@@ -13,7 +13,8 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
 
-import com.example.diegorueda.drawernavigation.ui.fragments.FeedsFragment;
+
+import com.example.diegorueda.drawernavigation.ui.fragments.CountryFragment;
 import com.example.diegorueda.drawernavigation.ui.fragments.HomeFragment;
 import com.example.diegorueda.drawernavigation.ui.fragments.StoreFragment;
 
@@ -68,7 +69,7 @@ public class MainActivity extends AppCompatActivity {
                 fragmentClass = HomeFragment.class;
                 break;
             case "Compras":
-                fragmentClass = FeedsFragment.class;
+                fragmentClass = CountryFragment.class;
                 break;
             default:
                 fragmentClass = HomeFragment.class;
