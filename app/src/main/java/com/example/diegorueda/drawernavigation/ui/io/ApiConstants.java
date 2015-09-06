@@ -1,4 +1,4 @@
-package com.example.diegorueda.drawernavigation.io;
+package com.example.diegorueda.drawernavigation.ui.io;
 
 /**
  * Created by diego.rueda on 9/4/2015.

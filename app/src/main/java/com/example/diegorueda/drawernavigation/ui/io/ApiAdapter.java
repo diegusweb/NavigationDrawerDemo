@@ -1,8 +1,7 @@
-package com.example.diegorueda.drawernavigation.io;
+package com.example.diegorueda.drawernavigation.ui.io;
 
-import android.database.Observable;
+import android.util.Log;
 
-import com.example.diegorueda.drawernavigation.io.model.HypedCountryResponse;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
@@ -16,20 +15,40 @@ public class ApiAdapter {
 
     private static ApiService API_SERVICE;
 
-    private static String ROOT = "https://restcountries.eu/rest/v1";
+    private static String ROOT = "http://pastebin.com";
+
+   /* public List<Country> GetAllCountries() {
+
+        Gson gson = new GsonBuilder().create();
+
+        RestAdapter restAdapter = new RestAdapter.Builder()
+                .setEndpoint(ROOT)
+                .setConverter(new GsonConverter(gson))
+                .build();
+
+        ApiService service = restAdapter.create(ApiService.class);
+
+        List<Country> countrylist = service.getCountries();
+
+        return countrylist;
+    }*/
+
 
     //SIngleton para cre el api desde cero
     public static ApiService getApiService () {
 
         if(API_SERVICE == null){
+            Log.d("DiegoResult:", "getApiService");
             RestAdapter adapter = new RestAdapter.Builder()
                     .setEndpoint(ROOT)
-                    .setLogLevel(RestAdapter.LogLevel.BASIC)
-                   // .setConverter(buildLastFmApiGsonConverter())
+                    //.setLogLevel(RestAdapter.LogLevel.BASIC)
+                    //.setConverter(buildLastFmApiGsonConverter())
                     .build();
 
             API_SERVICE = adapter.create(ApiService.class);
         }
+
+
 
         return API_SERVICE;
 
