@@ -7,23 +7,7 @@
     android:fitsSystemWindows="true">
 
     <!-- The main content view -->
-    <FrameLayout
-        android:id="@+id/content_frame"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
-
-        <!-- The ActionBar -->
-        <include
-            layout="@layout/toolbar"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
-
-    </LinearLayout>
+    <include layout="@layout/content_primary" />
 
 
 
@@ -34,6 +18,7 @@
         android:layout_height="match_parent"
         android:layout_gravity="start"
         app:headerLayout="@layout/nav_header"
+        android:fitsSystemWindows="true"
         app:menu="@menu/menu_navigation_drawer" />
 
 
