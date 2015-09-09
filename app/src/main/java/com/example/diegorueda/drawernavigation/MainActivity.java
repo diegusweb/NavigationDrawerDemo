@@ -15,6 +15,7 @@ import android.widget.Toast;
 
 
 import com.example.diegorueda.drawernavigation.ui.fragments.CountryFragment;
+import com.example.diegorueda.drawernavigation.ui.fragments.CuentaFragment;
 import com.example.diegorueda.drawernavigation.ui.fragments.HomeFragment;
 import com.example.diegorueda.drawernavigation.ui.fragments.StoreFragment;
 
@@ -70,6 +71,9 @@ public class MainActivity extends AppCompatActivity {
                 break;
             case "Compras":
                 fragmentClass = CountryFragment.class;
+                break;
+            case "Cuenta":
+                fragmentClass = CuentaFragment.class;
                 break;
             default:
                 fragmentClass = HomeFragment.class;
