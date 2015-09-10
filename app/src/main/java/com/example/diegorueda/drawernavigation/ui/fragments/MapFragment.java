@@ -1,6 +1,10 @@
 package com.example.diegorueda.drawernavigation.ui.fragments;
 
 
+import android.content.Context;
+import android.location.Criteria;
+import android.location.Location;
+import android.location.LocationManager;
 import android.os.Bundle;
 
 import android.support.v4.app.Fragment;
@@ -26,6 +30,8 @@ public class MapFragment extends Fragment {
     private static final LatLng DAVAO = new LatLng(7.0722, 125.6131);
     private GoogleMap map;
     private SupportMapFragment fragment;
+
+    Location location;
 
     public MapFragment() {
         // Required empty public constructor
@@ -57,6 +63,54 @@ public class MapFragment extends Fragment {
         if (map == null) {
             map = fragment.getMap();
             map.addMarker(new MarkerOptions().position(new LatLng(0, 0)));
+
+            map.setMyLocationEnabled(true);
+
+            setUpMap();
+
         }
     }
+
+    private void setUpMap(){
+        map.addMarker(new MarkerOptions().position(new LatLng(0, 0)).title("Marker").snippet("Snippet"));
+
+        // Enable MyLocation Layer of Google Map
+        map.setMyLocationEnabled(true);
+
+        // Get LocationManager object from System Service LOCATION_SERVICE
+        LocationManager locationManager = (LocationManager) getActivity().getSystemService(Context.LOCATION_SERVICE);
+
+        // Create a criteria object to retrieve provider
+        Criteria criteria = new Criteria();
+
+        // Get the name of the best provider
+        String provider = locationManager.getBestProvider(criteria, true);
+
+        // Get Current Location
+        Location myLocation = locationManager.getLastKnownLocation(provider);
+
+        // set map type
+        map.setMapType(GoogleMap.MAP_TYPE_NORMAL);
+
+        // Get latitude of the current location
+        double latitude = myLocation.getLatitude();
+
+        // Get longitude of the current location
+        double longitude = myLocation.getLongitude();
+
+        // Create a LatLng object for the current location
+        LatLng latLng = new LatLng(latitude, longitude);
+
+        // Show the current location in Google Map
+        map.moveCamera(CameraUpdateFactory.newLatLng(latLng));
+
+        // Zoom in the Google Map
+        map.animateCamera(CameraUpdateFactory.zoomTo(16));
+
+        map.addMarker(new MarkerOptions().position(new LatLng(latitude, longitude)).title("You are here!").snippet("Consider yourself located"));
+
+
+    }
+
+
 }
