@@ -9,11 +9,14 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.example.diegorueda.drawernavigation.MainActivity;
 import com.example.diegorueda.drawernavigation.R;
 import com.example.diegorueda.drawernavigation.model.AndroidVersion;
 import com.example.diegorueda.drawernavigation.model.Country;
 import com.example.diegorueda.drawernavigation.model.CountryTemp;
+import com.example.diegorueda.drawernavigation.ui.fragments.ViewDetailFragment;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
@@ -25,6 +28,9 @@ import java.util.List;
 public class ContryAdapter extends RecyclerView.Adapter<ContryAdapter.HypedArtistViewHolder>{
 
     List<AndroidVersion> androidVersionsLists = new ArrayList<>();
+
+    MainActivity mActivity;
+
     public ContryAdapter(Context context) {
 
     }
@@ -57,7 +63,7 @@ public class ContryAdapter extends RecyclerView.Adapter<ContryAdapter.HypedArtis
     }
 
 
-    public class HypedArtistViewHolder extends RecyclerView.ViewHolder
+    public class HypedArtistViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener
     {
         TextView textView;
         ImageView imageView;
@@ -68,6 +74,8 @@ public class ContryAdapter extends RecyclerView.Adapter<ContryAdapter.HypedArtis
             textView = (TextView) itemView.findViewById(R.id.name);
             imageView = (ImageView) itemView.findViewById(R.id.fthumbnail);
 
+            itemView.setOnClickListener(this);
+
         }
 
         public void bind(AndroidVersion androidVersion){
@@ -76,6 +84,11 @@ public class ContryAdapter extends RecyclerView.Adapter<ContryAdapter.HypedArtis
 
         }
 
+        @Override
+        public void onClick(View view) {
+            mActivity.getSupportFragmentManager().beginTransaction().replace(R.id.content_frame, new ViewDetailFragment() ).commit();
+            Toast.makeText(itemView.getContext(), "Item clicked. ", Toast.LENGTH_SHORT).show();
 
+        }
     }
 }

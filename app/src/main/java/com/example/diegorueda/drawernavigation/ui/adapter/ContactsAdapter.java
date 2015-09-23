@@ -1,6 +1,8 @@
 package com.example.diegorueda.drawernavigation.ui.adapter;
 
+import android.app.FragmentTransaction;
 import android.content.Context;
+import android.support.v4.app.FragmentManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,6 +13,7 @@ import android.widget.Toast;
 
 import com.example.diegorueda.drawernavigation.R;
 import com.example.diegorueda.drawernavigation.model.Contact;
+import com.example.diegorueda.drawernavigation.ui.fragments.ViewDetailFragment;
 
 import java.util.List;
 
@@ -37,11 +40,13 @@ public class ContactsAdapter extends RecyclerView.Adapter<ContactsAdapter.ViewHo
     @Override
     public void onBindViewHolder(ContactsAdapter.ViewHolder holder, int position) {
         holder.titleTextView.setText(mList[position]);
+
         holder.setClickListener(new ItemClickListener() {
             @Override
             public void onClick(View view, int position, boolean isLongClick) {
                 if (isLongClick) {
                     Toast.makeText(mContext, "#" + position + " - " + mList[position] + " (Long click)", Toast.LENGTH_SHORT).show();
+
                 } else {
                     Toast.makeText(mContext, "#" + position + " - " + mList[position], Toast.LENGTH_SHORT).show();
                 }
